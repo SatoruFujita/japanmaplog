@@ -28,11 +28,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        UserMailer.welcome_mail(@user).deliver_now
+        redirect_to root_path, success: '登録が完了しました'
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        flash.now[:danger] = "登録に失敗しました"
+        render :new
       end
     end
   end
