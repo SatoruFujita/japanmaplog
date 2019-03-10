@@ -2,22 +2,22 @@
   <div id="searchFormData">
     <el-form ref="form" :model="searchFormData" label-width="120px">
       <el-form-item label="都道府県">
-        <el-select v-model="searchFormData.placeName" placeholder="please select your zone">
+        <el-select v-model="searchFormData.placeName" placeholder="都道府県を選んでください">
+           <el-option v-for="(item, index) in getPref" v-bind:value="item.no">{{item.name}}</el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="宿泊日">
         <el-col :span="6">
-          <el-date-picker type="date" placeholder="Pick a date" v-model="searchFormData.checkInDate" style="width: 100%;"></el-date-picker>
+          <el-date-picker type="date" placeholder="宿泊日を選んでください" v-model="searchFormData.checkInDate" style="width: 100%;"></el-date-picker>
         </el-col>
-        <el-col class="line" :span="2">-</el-col>
+        <el-col class="line" :span="2">〜</el-col>
         <el-col :span="6">
-          <el-date-picker type="date" placeholder="Pick a date" v-model="searchFormData.checkOutDate" style="width: 100%;"></el-date-picker>
+          <el-date-picker type="date" placeholder="宿泊日を選んでください" v-model="searchFormData.checkOutDate" style="width: 100%;"></el-date-picker>
         </el-col>
       </el-form-item>
-      <!--<el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button>Cancel</el-button>
-      </el-form-item>-->
+      <<el-form-item>
+        <el-button type="primary" @click="onSubmit">検索</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </div>
