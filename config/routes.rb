@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'hotel_search/home'
   get 'sessions/new'
   resources :users
   get 'pages/index'
