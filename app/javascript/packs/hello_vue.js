@@ -18,7 +18,8 @@ const app = new Vue({
         placeName: '',
         checkInDate: '',
         checkOutDate: ''
-      }
+      },
+      vacantHotelData:[]
     }
   },
   computed: {
@@ -34,19 +35,26 @@ const app = new Vue({
           }
       }
   },
-  methods: {
-    search_hotels: function(){
-        axios.create({
-          baseURL: 'https://app.rakuten.co.jp/services/api',
-          timeout: 3000,
-          method: 'GET',
-          responseType: 'json', // レスポンスはjsonオブジェクト固定
-          params: params
+  created: function(){
+    this.search()
+  },
+  //楽天トラベルAPI呼び出し
+  methods:{
+    search:function(){
+        axios.get(`https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426
+          ?applicationId=1011661123368946334&format=xml
+&checkinDate=2019-03-13
+&checkoutDate=2019-03-14
+&latitude=128440.51
+&longitude=503172.21
+&searchRadius=1&elements=hotels`
+        )
+        .then((response) => {
+          console.log(response);
+          this.vacantHotelData = response.data.vacantHotelData;
         })
-        .then(response => response.data)
-    }
+      }
   }
-
 })
 
 

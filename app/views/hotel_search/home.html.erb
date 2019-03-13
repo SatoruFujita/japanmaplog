@@ -15,10 +15,12 @@
           <el-date-picker type="date" placeholder="宿泊日を選んでください" v-model="searchFormData.checkOutDate" style="width: 100%;"></el-date-picker>
         </el-col>
       </el-form-item>
-      <<el-form-item>
-        <el-button type="primary" @click="onSubmit">検索</el-button>
+      <el-form-item>
+        <el-button type="primary" @click="search">検索</el-button>
       </el-form-item>
     </el-form>
   </div>
+
+
 </div>
 <%= javascript_pack_tag 'hello_vue'%>
