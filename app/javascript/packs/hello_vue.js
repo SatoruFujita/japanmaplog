@@ -42,6 +42,7 @@ const app = new Vue({
   },
   //楽天トラベルAPI呼び出しパラメータを分離して撮るようにする
   methods:{
+
      search(){
         axios.get(`https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426
           ?applicationId=1011661123368946334&format=xml
@@ -50,7 +51,7 @@ const app = new Vue({
 &latitude=128440.51
 &longitude=503172.21
 &searchRadius=1`
-        )
+)
         .then((response) => {
           console.log(response);
           console.log(process.env.VUE_APP_GOOGLE_MAP_API_KEY);

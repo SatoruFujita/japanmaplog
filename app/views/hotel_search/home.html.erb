@@ -3,7 +3,7 @@
     <el-form ref="form" :model="searchFormData" label-width="120px">
       <el-form-item label="都道府県">
         <el-select v-model="searchFormData.placeName" placeholder="都道府県を選んでください">
-           <el-option v-for="(item, index) in getPref" v-bind:value="item.no"  >{{item.name}}</el-option>
+           <el-option v-for="(item, index) in getPref" :key="item.no" >{{item.name}}</el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="宿泊日">
