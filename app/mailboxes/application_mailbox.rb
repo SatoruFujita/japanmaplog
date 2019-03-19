@@ -1,5 +1,5 @@
 class ApplicationMailbox < ActionMailbox::Base
   # route /something/i => :somewhere
-  routing /^save@/i     => :forwards
-  routing /@replies\./i => :replies
+  routing "post@example.com"   => :posts
+  routing /\Areply-[0-9a-f]+\z/i => :comments
 ends
