@@ -17,9 +17,9 @@ class PostsMailbox < ApplicationMailbox
     def post_attrs
       {
         title: mail.subject || Time.current.to_s,
-        body: EmailParser.parse(mail.source)
+        body: EmailParser.parse(mail.source),
         #添付ファイルもココに書く
-        
+        attachments: mail.attachments
       }
     end
 
