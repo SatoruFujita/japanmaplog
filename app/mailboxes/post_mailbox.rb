@@ -3,13 +3,17 @@ class PostsMailbox < ApplicationMailbox
 
   def process
     User.find_by(email: mail.from).posts.create!(post_attrs)
+
+
+
+
   end
 
 
   private
     def ensure_sender_is_a_user
       unless User.exist?(email: mail.from)
-        bounce_with UserMailer.missing_forward(inbound_email)
+        bounce_with UserMailer.missing(inbound_email)
       end
     end
 
