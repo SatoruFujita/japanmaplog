@@ -1,6 +1,7 @@
-<h2>記事一覧</h2>
+
 <div class="article-index-wrapper">
   <div class="container">
+    <h2>記事一覧</h2>
     <% @articles.each do |article| %>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -12,7 +13,7 @@
             <%= article.body %>
           </p>
           <p class="article-text">
-            <%= image_tag article.image %>
+            <%= article.image %><!--今は仮にファイル名-->
           </p>
           <p class="article-text">
             <%= article.prefecture_id %>

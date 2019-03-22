@@ -44,6 +44,9 @@ const app = new Vue({
   methods:{
 
      search(){
+       require('dotenv').config();
+
+
         axios.get(`https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426
           ?applicationId=1011661123368946334&format=xml
 &checkinDate=2019-03-15
