@@ -7,6 +7,24 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  process :get_exif_info
+
+  def get_exif_info
+    require 'exifr/jpeg'
+    #緯度経度のない画像の場合のケアは必要
+    @latitude = EXIFR::JPEG::new(self.file.file).gps.latitude
+    @longitude = EXIFR::JPEG::new(self.file.file).gps.longitude
+
+    
+
+    binding.pry
+  end
+
+  # 許可する画像の拡張子
+  def extension_white_list
+    %W[jpg jpeg]
+  end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir

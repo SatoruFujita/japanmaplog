@@ -12,8 +12,10 @@
           <p class="article-text">
             <%= article.body %>
           </p>
-          <p class="article-text">
-            <%= article.image %><!--今は仮にファイル名-->
+          <p class="article-image">
+            <% if article.image.present? %>
+              <%= image_tag article.image.url %>
+            <% end %>
           </p>
           <p class="article-text">
             <%= article.prefecture_id %>

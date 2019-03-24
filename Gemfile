@@ -41,6 +41,8 @@ gem 'jquery-rails'
 gem 'webpacker', github:'rails/webpacker'
 gem "actionmailbox", require: "action_mailbox"
 gem "carrierwave"
+gem 'exifr'
+gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
