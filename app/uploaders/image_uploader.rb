@@ -2,7 +2,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-  require 'geocoder'
+  
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
@@ -10,17 +10,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   process :get_exif_info
 
   def get_exif_info
-    require 'exifr/jpeg'
-    #緯度経度のない画像の場合のケアは必要
-    latitude = EXIFR::JPEG::new(self.file.file).gps.latitude
-    longitude = EXIFR::JPEG::new(self.file.file).gps.longitude
 
-    #日本語に設定
-    Geocoder.configure(:language => :ja)
-    address = Geocoder.address("#{latitude}, #{longitude}").split(',')[2].strip
-    @prefecureId = Prefecture.where("name= '#{address}'").select("id")
-
-    #binding.pry
   end
 
   # 許可する画像の拡張子
