@@ -4,13 +4,13 @@ class PagesController < ApplicationController
     if logged_in?
       articles = Article.where(user_id: current_user.id)
 
-      data ={}
+      @prefecture_data ={}
+      @prefecture_data["都道府県"] = "回数"
       Prefecture.all.each do |prefecture|
-        data["#{prefecture.name}"] = articles.where(prefecture_id: prefecture.id).count()
+        @prefecture_data["#{prefecture.name}"] = articles.where(prefecture_id: prefecture.id).count()
+
       end
-
-      binding.pry
-
+      @prefecture_data_json = @prefecture_data.to_json.html_safe
     end
   end
 end

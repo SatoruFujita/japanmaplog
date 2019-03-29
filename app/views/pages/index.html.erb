@@ -14,14 +14,15 @@
 			google.charts.setOnLoadCallback(drawMap);
 
 			function drawMap() {
-			//都道府県単位のデータ ここはデータを取ってくるようにする
-			var data = [
-			    ["都道府県","回数"],
-			    ["北海道", 5],
-			    ["青森",   2],
-			    ["秋田",   0],
-			    ["岩手",   1]
-			];
+			// arr_json取得
+			var arrJson = JSON.parse($('.arr_json').val());
+			// 都道府県データのarr_jsonをパースし配列にする
+
+			var data = [];
+			for (key in arrJson){
+					data.push([key, arrJson[key]])
+			}
+			console.log(data);
 			var dt = google.visualization.arrayToDataTable(data);
 			var options = {
 				region: 'JP',  //地域
@@ -36,14 +37,8 @@
 					var selectedItem = chart.getSelection()[0];
 					var row = selectedItem.row
 					if (selectedItem) {
-							switch (row){
-									case 0:
-											url ="/articles/#11";
-											break;
-									case 1:
-											url ="/articles/#13";
-											break;
-							}
+							//各都道府県のリンク
+							url ="/articles/#" + (row + 1);
 							window.location.href = url;
 					}
 			}
@@ -68,6 +63,7 @@
 			<div class="row">
 				<div id="region-div">
 				</div>
+				<input name="arr_json" type="hidden" value='<%= @prefecture_data_json %>' class='arr_json'/>
 			</div>
 		</div>
 	</body>
