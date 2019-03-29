@@ -30,8 +30,25 @@
 				resolution: 'provinces',
 				colors:['white','green'] //階層の色
 			};
-			//出力するDivを指定して chart を生成
 			var chart = new google.visualization.GeoChart(document.getElementById('region-div'));
+			//各都道府県の記事に遷移
+			function selectHandler() {
+					var selectedItem = chart.getSelection()[0];
+					var row = selectedItem.row
+					if (selectedItem) {
+							switch (row){
+									case 0:
+											url ="/articles/#11";
+											break;
+									case 1:
+											url ="/articles/#13";
+											break;
+							}
+							window.location.href = url;
+					}
+			}
+
+			google.visualization.events.addListener(chart, 'select', selectHandler);
 			//描画
 			chart.draw(dt, options);
 		}

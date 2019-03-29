@@ -19,27 +19,35 @@ class ArticlesController < ApplicationController
 
     #日本語に設定
     Geocoder.configure(:language => :ja)
-    address = Geocoder.address("#{latitude}, #{longitude}").split(',')[2].strip
-    prefectureData = Prefecture.find_by("name= '#{address}'")
 
+    addressArray = Geocoder.address("#{latitude}, #{longitude}").split(',')
+    addressIndex = addressArray.index_select {|v| v =~  /(東京都|北海道|(?:京都|大阪)府|.{2,3}県)/}[0]
+
+    prefectureData = Prefecture.find_by("name= '#{addressArray[addressIndex].strip.gsub(/[都府県]/, "")}'")
+
+    #binding.pry
     @article.prefecture_id = prefectureData.id
 
-    binding.pry
     if @article.save
       render :json => {"article" => "RIGHT"}, :status => 200
     else
     end
   end
 
- private
- def getPrefectureId
-
- end
-
-
   def index
       #ログインしている自分の記事を見る
       #将来的には引数を用意してそれぞれのユーザーの記事を観れるようにする
-      @articles = Article.where(user_id: current_user.id)
+      @articles = Article.where(user_id: current_user.id).order(:prefecture_id)
   end
+end
+
+class Array
+ def index_select(obj = nil)
+    if obj.nil? && !block_given?
+      self.each
+    else
+      proc = obj.nil? ? -> (i){ yield self[i]} : -> {self[i] == obj}
+      self.each_index.select(&proc)
+    end
+ end
 end
