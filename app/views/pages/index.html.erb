@@ -16,13 +16,11 @@
 			function drawMap() {
 			// arr_json取得
 			var arrJson = JSON.parse($('.arr_json').val());
-			// 都道府県データのarr_jsonをパースし配列にする
-
 			var data = [];
 			for (key in arrJson){
 					data.push([key, arrJson[key]])
 			}
-			console.log(data);
+			//console.log(data);
 			var dt = google.visualization.arrayToDataTable(data);
 			var options = {
 				region: 'JP',  //地域
@@ -37,7 +35,6 @@
 					var selectedItem = chart.getSelection()[0];
 					var row = selectedItem.row
 					if (selectedItem) {
-							//各都道府県のリンク
 							url ="/articles/#" + (row + 1);
 							window.location.href = url;
 					}
