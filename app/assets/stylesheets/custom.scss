@@ -6,3 +6,34 @@
       height: 50%;
     }
 }
+#page-top {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background: #3f98ef;
+  opacity: 0.6;
+  a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    &::before {
+      font-family: FontAwesome;
+      content: '^';
+      font-size: 25px;
+      color: #fff;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      text-align: center;
+    }
+  }
+}

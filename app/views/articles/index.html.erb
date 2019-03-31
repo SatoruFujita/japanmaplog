@@ -11,6 +11,11 @@
             <%= article.title %>
           </h2>
           <p class="article-text">
+          <% if !article.prefecture_id.blank? %>
+            <%= Prefecture.find_by(id: article.prefecture_id).name%>
+          <% end %>
+          </p>
+          <p class="article-text">
             <%= article.body %>
           </p>
           <p class="article-image">
@@ -18,12 +23,8 @@
               <%= image_tag article.image.url %>
             <% end %>
           </p>
-          <p class="article-text">
-          <% if !article.prefecture_id.blank? %>
-            <%= Prefecture.find_by(id: article.prefecture_id).name%>
-          <% end %>
-          </p>
-        </div>        
+
+        </div>
       </div>
     </div>
     <% end %>
