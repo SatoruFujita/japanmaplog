@@ -1,2 +1,2 @@
 class ApplicationMailbox < ActionMailbox::Base
-ends
+end
