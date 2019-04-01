@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
+    #respond_to do |format|
       if @user.save
         UserMailer.welcome_mail(@user).deliver_now
         redirect_to root_path, success: '登録が完了しました'
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         flash.now[:danger] = "登録に失敗しました"
         render :new
       end
-    end
+    #end
   end
 
   # PATCH/PUT /users/1
