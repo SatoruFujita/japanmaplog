@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
     #respond_to do |format|
       if @user.save
-        UserMailer.welcome_mail(@user).deliver_now
+        #UserMailer.welcome_mail(@user).deliver_now
         redirect_to root_path, success: '登録が完了しました'
       else
         flash.now[:danger] = "登録に失敗しました"
