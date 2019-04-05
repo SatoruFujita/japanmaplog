@@ -70,6 +70,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "japanmaplog_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.smtp_settings = {
+    :user_name => 'SatoruFujita',
+    :password => 'n73TuGq7M987H3A',
+    :domain => 'y',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
