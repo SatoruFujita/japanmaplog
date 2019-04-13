@@ -36,7 +36,7 @@ class ArticlesController < ApplicationController
 
   def index
       #ログインしている自分の記事を見る
-      #将来的には引数を用意してそれぞれのユーザーの記事を観れるようにする
+      #シェアできるようにする機能も欲しい
       @articles = Article.where(user_id: current_user.id).order(:prefecture_id)
   end
 end
