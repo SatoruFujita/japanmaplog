@@ -55,13 +55,17 @@
 
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse navbar-def" id="bs-example-navbar-collapse-1">
+                    <% if logged_in? %>
 
+                    <% end %>
                   <ul class="nav navbar-nav navbar-right">
 
                     <li>
                       <%= link_to 'Home', root_path, method: :get%>
                     </li>
                     <% if logged_in? %>
+                    <li><%= link_to 'ID:' + @current_user.id.to_s + ' ユーザー名:' + @current_user.name %>
+                      </li>
                       <li>
                         <%= link_to 'LogOut', logout_path , method: :delete %>
                       </li>
