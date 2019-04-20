@@ -64,10 +64,10 @@
                       <%= link_to 'Home', root_path, method: :get%>
                     </li>
                     <% if logged_in? %>
+                    <li>
+                      <%= link_to 'LogOut', logout_path , method: :delete %>
+                    </li>
                     <li><%= link_to 'ID:' + @current_user.id.to_s + ' ユーザー名:' + @current_user.name %>
-                      </li>
-                      <li>
-                        <%= link_to 'LogOut', logout_path , method: :delete %>
                       </li>
                     <% else %>
                       <li>
