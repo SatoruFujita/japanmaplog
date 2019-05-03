@@ -5,12 +5,12 @@ class ArticlesController < ApplicationController
   def create
     imageFile = params['attachment1']
 
+    #ドメイン直打ちになっているのでここも修正必要
     @article = Article.new(
       title: params[:subject],
       body: params[:text],
       image: imageFile,
-      #prefecture_id: @prefecureId,
-      user_id: (params[:to].tr("@Japanmaplog.xyz", "").tr("post","")).to_i
+      user_id: (params[:to].tr("@Japanmaplog.work", "").tr("post","")).to_i
     )
 
     #緯度経度のない画像の場合のケアは必要
