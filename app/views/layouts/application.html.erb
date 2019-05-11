@@ -37,7 +37,7 @@
             </div>
           <%end %>
           <div class="col-md-3 col-xs-12 col-sm-12 header-logo">
-              <h1 class="logo">日本地図ログ〜JapanMapLog</h1>
+              <h1 class="logo"><a href='/'>日本地図ログ〜JapanMapLog</a></h1>
           </div>
 
           <div class="col-md-8 col-md-offset-1 col-xs-12 col-sm-12">
@@ -67,8 +67,6 @@
                     <li>
                       <%= link_to 'LogOut', logout_path , method: :delete %>
                     </li>
-                    <li><%= link_to 'ID:' + @current_user.id.to_s + ' ユーザー名:' + @current_user.name %>
-                      </li>
                     <% else %>
                       <li>
                         <%= link_to 'Login', login_path, method: :get %>
