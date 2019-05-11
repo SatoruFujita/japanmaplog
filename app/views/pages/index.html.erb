@@ -58,8 +58,9 @@
 				<div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12">
 
 				<%= link_to '新規登録' , new_user_path, class: 'btn btn-primary'%>
+				<% if logged_in? %>
 				<%= link_to '登録情報更新' , edit_user_path(@current_user), class: 'btn btn-primary'%>
-
+				<% end %>
 				<div id="region-div">
 				</div>
 				<input name="arr_json" type="hidden" value='<%= @prefecture_data_json %>' class='arr_json'/>
