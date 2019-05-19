@@ -4,13 +4,13 @@ class ArticlesController < ApplicationController
   require 'exifr/jpeg'
   def create
     imageFile = params['attachment1']
+    const domain = "@Japanmaplog.work"
 
-    #ドメイン直打ちになっているのでここも修正必要
     @article = Article.new(
       title: params[:subject],
       body: params[:text],
       image: imageFile,
-      user_id: (params[:to].tr("@Japanmaplog.work", "").tr("post","")).to_i
+      user_id: (params[:to].tr(domain, "").tr("post","")).to_i
     )
 
     #緯度経度のない画像の場合のケアは必要
@@ -38,6 +38,10 @@ class ArticlesController < ApplicationController
       #ログインしている自分の記事を見る
       #シェアできるようにする機能も欲しい
       @articles = Article.where(user_id: current_user.id).order(:prefecture_id)
+  end
+
+  def show
+    @articles = Article.where(user_id: params[:id]).order(:prefecture_id)
   end
 end
 
