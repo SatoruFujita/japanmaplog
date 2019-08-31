@@ -46,6 +46,19 @@
 			chart.draw(dt, options);
 		}
 
+		//ロードされた際の処理として実施：
+		window.onload = function(){
+		  //HTML内に画像を表示
+		  html2canvas(document.getElementById('region-div'),{
+		    onrendered: function(canvas){
+		      //imgタグのsrcの中に、html2canvasがレンダリングした画像を指定する。
+		      var imgData = canvas.toDataURL('image/jpeg');
+					console.log(imgData);
+		      document.getElementById('download-map').href = imgData;
+		    }
+		  });
+		}
+
 		</script>
 
 		<title>日本地図ログ</title>
@@ -60,6 +73,7 @@
 				<%= link_to '新規登録' , new_user_path, class: 'btn btn-primary'%>
 				<% if logged_in? %>
 				<%= link_to '登録情報更新' , edit_user_path(@current_user), class: 'btn btn-primary'%>
+				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary download-map', id:'download-map' %>
 				<% end %>
 				<div id="region-div">
 				</div>

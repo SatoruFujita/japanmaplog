@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
+//= require html2canvas
 //= require_tree .
