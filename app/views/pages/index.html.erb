@@ -20,7 +20,7 @@
 			for (key in arrJson){
 					data.push([key, arrJson[key]])
 			}
-			//console.log(data);
+
 			var dt = google.visualization.arrayToDataTable(data);
 			var options = {
 				region: 'JP',  //地域
@@ -44,12 +44,15 @@
 			google.visualization.events.addListener(chart, 'select', selectHandler);
 			//描画
 			chart.draw(dt, options);
+
+			//描画を終えてからリンク
+			getDisplayImage();
 		}
 
 		  //HTML内に画像を表示
 			function getDisplayImage(){
 				//html2canvas実行
-				html2canvas(document.getElementById('region-div')).then(function(canvas) {
+				html2canvas(document.getElementById('container')).then(function(canvas) {
 					downloadImage(canvas.toDataURL("image/jpeg"));
 				});
 			}
@@ -61,7 +64,7 @@
 				for (var i = 0; i < encdata.length; i++) {
 					outdata[i] = encdata.charCodeAt(i);
 				}
-				var blob = new Blob([outdata], ["image/jpg"]);
+				var blob = new Blob([outdata], ["image/jpeg"]);
 
 				if (window.navigator.msSaveBlob) {
 					//IE用
@@ -71,7 +74,6 @@
 					document.getElementById("download-map").href = data;			//base64そのまま設定
 					document.getElementById("download-map").download = fname;		//ダウンロードファイル名設定
 
-					console.log(document.getElementById("download-map").download);
 				}
 			}
 
@@ -89,7 +91,7 @@
 				<%= link_to '新規登録' , new_user_path, class: 'btn btn-primary'%>
 				<% if logged_in? %>
 				<%= link_to '登録情報更新' , edit_user_path(@current_user), class: 'btn btn-primary'%>
-				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary', id:'download-map', download: 'hogehoge' ,onclick: 'getDisplayImage();' %>
+				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary', id:'download-map', download: 'hogehoge' %>
 				<% end %>
 				<div id="region-div">
 				</div>
