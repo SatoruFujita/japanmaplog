@@ -100,16 +100,16 @@
 						}
 						image.src = "data:image/svg+xml;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(svgData)));
 
-						var xhr = new XMLHttpRequest();
+						/*var xhr = new XMLHttpRequest();
 						xhr.open('GET', uri);
 						xhr.responseType = 'blob';
 						xhr.onloadend = function () {
 								if (xhr.status !== 200) {
 										return false;
 								}
-								window.navigator.msSaveOrOpenBlob(xhr.response, fileName);
+								window.navigator.msSaveOrOpenBlob(xhr.response, "image.png");
 						};
-						xhr.send();
+						xhr.send();*/
 
 					}
 			  }());
