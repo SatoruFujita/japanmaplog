@@ -46,19 +46,19 @@
 			chart.draw(dt, options);
 
 			//描画を終えてからリンク
-			getDisplayImage();
+			//getDisplayImage();
 		}
 
 		  //HTML内に画像を表示
 			function getDisplayImage(){
 				//html2canvas実行
-				html2canvas(document.getElementById('container')).then(function(canvas) {
+				/*html2canvas(document.getElementById('container')).then(function(canvas) {
 					downloadImage(canvas.toDataURL("image/jpeg"));
-				});
+				});*/
 			}
 
-			function downloadImage (data) {
-				var fname ="testimage.jpg";
+			function downloadImage (filename) {
+				/*var fname ="testimage.jpg";
 				var encdata= atob(data.replace(/^.*,/, ''));
 				var outdata = new Uint8Array(encdata.length);
 				for (var i = 0; i < encdata.length; i++) {
@@ -74,8 +74,45 @@
 					document.getElementById("download-map").href = data;			//base64そのまま設定
 					document.getElementById("download-map").download = fname;		//ダウンロードファイル名設定
 
-				}
+				}*/
 			}
+			(function() {
+			    document.addEventListener('DOMContentLoaded', function() {
+			      document.getElementById('convert-button').addEventListener('click', function() {
+			        svg2imageData();
+			      });
+			    });
+			    function svg2imageData() {
+						var svg = document.querySelector("svg");
+						var svgData = new XMLSerializer().serializeToString(svg);
+						var canvas = document.createElement("canvas");
+						canvas.width = svg.width.baseVal.value;
+						canvas.height = svg.height.baseVal.value;
+
+						var ctx = canvas.getContext("2d");
+						var image = new Image;
+						image.onload = function(){
+						    ctx.drawImage( image, 0, 0 );
+						    var a = document.createElement("a");
+						    a.href = canvas.toDataURL("image/png");
+						    a.setAttribute("download", "image.png");
+						    a.dispatchEvent(new CustomEvent("click"));
+						}
+						image.src = "data:image/svg+xml;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(svgData)));
+
+						var xhr = new XMLHttpRequest();
+						xhr.open('GET', uri);
+						xhr.responseType = 'blob';
+						xhr.onloadend = function () {
+								if (xhr.status !== 200) {
+										return false;
+								}
+								window.navigator.msSaveOrOpenBlob(xhr.response, fileName);
+						};
+						xhr.send();
+
+					}
+			  }());
 
 		</script>
 
@@ -91,7 +128,7 @@
 				<%= link_to '新規登録' , new_user_path, class: 'btn btn-primary'%>
 				<% if logged_in? %>
 				<%= link_to '登録情報更新' , edit_user_path(@current_user), class: 'btn btn-primary'%>
-				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary', id:'download-map', download: 'hogehoge' %>
+				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary download-image', id:'convert-button', download:'hogehgoe'%>
 				<% end %>
 				<div id="region-div">
 				</div>
