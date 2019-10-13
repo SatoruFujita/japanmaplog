@@ -84,33 +84,32 @@
 			    });
 			    function svg2imageData() {
 						var svg = document.querySelector("svg");
+						var width = svg.width.baseVal.value;
+						var height = svg.height.baseVal.value;
 						var svgData = new XMLSerializer().serializeToString(svg);
-						var canvas = document.createElement("canvas");
-						canvas.width = svg.width.baseVal.value;
-						canvas.height = svg.height.baseVal.value;
+						$("body").append("<canvas id='canvas1' class='hidden' width="
+						                                  + width + " height=" + height +"></canvas>");
 
+						var canvas = $("#canvas1")[0];
 						var ctx = canvas.getContext("2d");
-						var image = new Image;
+
+						var imgsrc = "data:image/svg+xml;charset=utf-8;base64,"
+						                       + btoa(unescape(encodeURIComponent(svgData)));
+						var image = new Image();
 						image.onload = function(){
-						    ctx.drawImage( image, 0, 0 );
-						    var a = document.createElement("a");
-						    a.href = canvas.toDataURL("image/png");
-						    a.setAttribute("download", "image.png");
-						    a.dispatchEvent(new CustomEvent("click"));
+
+						    ctx.drawImage(image, 0, 0);
+						    // Optional: 自動でダウンロードさせる場合
+						    $("body").append("<a id='image-file' class='hidden' type='application/octet-stream' href='"
+						                       + canvas.toDataURL("image/png") + "' download='japanmaplog.png'>Donload Image</a>");
+						    $("#image-file")[0].click();
+
+						    // 後処理
+						    $("#canvas1").remove();
+						    $("#image-file").remove();
+
 						}
-						image.src = "data:image/svg+xml;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(svgData)));
-
-						/*var xhr = new XMLHttpRequest();
-						xhr.open('GET', uri);
-						xhr.responseType = 'blob';
-						xhr.onloadend = function () {
-								if (xhr.status !== 200) {
-										return false;
-								}
-								window.navigator.msSaveOrOpenBlob(xhr.response, "image.png");
-						};
-						xhr.send();*/
-
+						image.src = imgsrc;
 					}
 			  }());
 
@@ -128,7 +127,7 @@
 				<%= link_to '新規登録' , new_user_path, class: 'btn btn-primary'%>
 				<% if logged_in? %>
 				<%= link_to '登録情報更新' , edit_user_path(@current_user), class: 'btn btn-primary'%>
-				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary download-image', id:'convert-button', download:'hogehgoe'%>
+				<%= link_to 'ダウンロード' , '#' , class: 'btn btn-primary download-image', id:'convert-button'%>
 				<% end %>
 				<div id="region-div">
 				</div>
