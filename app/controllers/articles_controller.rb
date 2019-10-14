@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   protect_from_forgery except: :create
   require 'geocoder'
   require 'exifr/jpeg'
-  const Domain = "@japanmaplog.work"
+  Domain = "@japanmaplog.work"
   def create
     imageFile = params['attachment1']
 
