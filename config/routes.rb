@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  get 'articles/:id' => 'articles#show'
+  get 'articles/:id' => 'articles#show' 
   post  'articles/create' => 'articles#create'
 end
