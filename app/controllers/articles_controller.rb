@@ -6,7 +6,6 @@ class ArticlesController < ApplicationController
   def create
     imageFile = params['attachment1']
 
-
     @article = Article.new(
       title: params[:subject],
       body: params[:text],
@@ -15,8 +14,8 @@ class ArticlesController < ApplicationController
     )
 
     #緯度経度のない画像の場合のケアは必要
-    latitude = EXIFR::JPEG::new(@article.image.file.file).gps.latitude
-    longitude = EXIFR::JPEG::new(@article.image.file.file).gps.longitude
+    latitude = EXIFR::JPEG::new(@article.image.file).gps.latitude
+    longitude = EXIFR::JPEG::new(@article.image.file).gps.longitude
 
     #日本語に設定
     Geocoder.configure(:language => :ja)
