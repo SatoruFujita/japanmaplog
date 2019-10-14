@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   require 'exifr/jpeg'
   def create
     imageFile = params['attachment1']
-    const domain = "@Japanmaplog.work"
+    const domain = "@japanmaplog.work"
 
     @article = Article.new(
       title: params[:subject],
