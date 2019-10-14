@@ -2,15 +2,16 @@ class ArticlesController < ApplicationController
   protect_from_forgery except: :create
   require 'geocoder'
   require 'exifr/jpeg'
+  const Domain = "@japanmaplog.work"
   def create
     imageFile = params['attachment1']
-    const domain = "@japanmaplog.work"
+
 
     @article = Article.new(
       title: params[:subject],
       body: params[:text],
       image: imageFile,
-      user_id: (params[:to].tr(domain, "").tr("post","")).to_i
+      user_id: (params[:to].tr(Domain, "").tr("post","")).to_i
     )
 
     #緯度経度のない画像の場合のケアは必要
