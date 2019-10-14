@@ -14,8 +14,8 @@ class ArticlesController < ApplicationController
     )
 
     #緯度経度のない画像の場合のケアは必要
-    latitude = EXIFR::JPEG::new(@article.image.file).gps.latitude
-    longitude = EXIFR::JPEG::new(@article.image.file).gps.longitude
+    latitude = EXIFR::JPEG::new(imageFile.tempfile.to_path.to_s).gps.latitude
+    longitude = EXIFR::JPEG::new(imageFile.tempfile.to_path.to_s).gps.longitude
 
     #日本語に設定
     Geocoder.configure(:language => :ja)
